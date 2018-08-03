@@ -4204,6 +4204,12 @@ The list can be customized by the [[listitem.column|listitem]] and
 EOT
          )
 
+    singlePattern('_totaltasks')
+    descr(<<'EOT'
+The number of sub-tasks (including the current task) that complete during 
+the reported time period. This is the sum of closedtasks and opentasks.
+EOT
+         )
     singlePattern('_turnover')
     descr(<<'EOT'
 The financial turnover of an account during the reporting interval.

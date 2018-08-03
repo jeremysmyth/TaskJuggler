@@ -1294,6 +1294,15 @@ class TaskJuggler
       query.string = "#{count.to_i}"
     end
 
+    def query_totaltasks(query)
+      count = closedTasks(query) + openTasks(query)
+
+      query.sortable = query.numerical = count
+      # For the string output, we only use integer numbers.
+      query.string = "#{count.to_i}"
+    end
+
+
     def query_closedtasks(query)
       count = closedTasks(query)
 
