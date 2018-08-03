@@ -99,6 +99,10 @@ class TaskJuggler
       @scanner.addMacro(Macro.new('today', @project['now'].
                                    to_s(@project['timeFormat']),
                                   @scanner.sourceFileInfo))
+      @scanner.addMacro(Macro.new('weekstart', @project['now'].
+                                   beginOfWeek(@project['weekStartsMonday']).
+                                   to_s(@project['timeFormat']),
+                                  @scanner.sourceFileInfo))
     end
 
     def parseReportAttributes(report, attributes)
