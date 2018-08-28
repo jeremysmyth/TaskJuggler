@@ -37,6 +37,7 @@ class TaskJuggler
                      :BOLD, :ITALIC, :CODE, :BOLDITALIC, :PRE,
                      :HREF, :HREFEND, :REF, :REFEND, :HLINE,
                      :HTMLBLOB, :FCOLSTART, :FCOLEND,
+                     :DELSTART, :DELEND,
                      :QUERY,
                      :INLINEFUNCSTART, :INLINEFUNCEND,
                      :BLOCKFUNCSTART, :BLOCKFUNCEND, :ID, :STRING,

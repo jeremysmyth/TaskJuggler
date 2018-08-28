@@ -272,6 +272,13 @@ class TaskJuggler
         el.appendSpace = !@val[4].nil?
         el
       })
+      pattern(%w( $DELSTART !space !plainTextWithLinks $DELEND !space ),
+         lambda {
+            el = RichTextElement.new(@richTextI, :del, @val[2])
+            el.data = @val[0]
+            el.appendSpace = !@val[4].nil?
+            el
+      })
       pattern(%w( $FCOLSTART !space !plainTextWithLinks $FCOLEND !space ),
               lambda {
         el = RichTextElement.new(@richTextI, :fontCol, @val[2])

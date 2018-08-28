@@ -222,6 +222,7 @@ class TaskJuggler
       when :italic
       when :bold
       when :fontCol
+      when :del
       when :code
       when :text
       when :htmlblob
@@ -344,6 +345,9 @@ class TaskJuggler
       when :bold
         pre = '<b>'
         post = '</b>'
+      when :del
+         pre = '<del>'
+         post = '</del>'
       when :fontCol
         pre = "<fcol:#{@data}>"
         post = '</fcol>'
@@ -461,6 +465,8 @@ class TaskJuggler
         XMLElement.new('i')
       when :bold
         XMLElement.new('b')
+      when :del
+         XMLElement.new('del')
       when :fontCol
         XMLElement.new('span', 'style' => "color:#{@data}")
       when :code

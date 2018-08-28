@@ -58,6 +58,8 @@ class TaskJuggler
         # The <nowiki> token puts the scanner into :nowiki mode.
         [ nil, /<nowiki>/, [ :bop, :bol, :inline ], method('nowikiStart') ],
         [ nil, /<html>/, [ :bop, :bol, :inline ], method('htmlStart') ],
+        [ :DELSTART, /-\[/, [ :bop, :bol, :inline ], method('delStart') ],
+        [ :DELEND, /]-/ , [ :bop, :bol, :inline ], method('delEnd') ],
         [ :FCOLSTART, /<fcol:([a-z]+|#[0-9A-Fa-f]{3,6})>/, [ :bop, :bol,
           :inline ],
           method('fontColorStart') ],
@@ -142,6 +144,15 @@ class TaskJuggler
     def number(type, match)
       self.mode = :inline
       [ "NUMBER#{match.count('#')}".intern, match ]
+    end
+
+    def delStart(type, match)
+      self.mode = :inline
+      [ type, match ]
+    end
+
+    def delEnd(type, match)
+      [ type, match ]
     end
 
     def fontColorStart(type, match)
