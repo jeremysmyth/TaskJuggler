@@ -36,7 +36,7 @@ class TaskJuggler
         else
           out += ", "
         end
-        out += "#{iv.start} + #{(iv.end - iv.start) / 3600}h"
+        out += "#{iv.start} + #{(iv.end - iv.start) / 60}min"
       end
     end
 
@@ -49,7 +49,7 @@ class TaskJuggler
         else
           out += ",\n"
         end
-        out += "#{iv.start} + #{(iv.end - iv.start) / 3600}h"
+        out += "#{iv.start} + #{(iv.end - iv.start) / 60}min"
       end
       out += ' { overtime 2 }'
     end
