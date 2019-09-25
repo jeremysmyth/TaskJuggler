@@ -175,7 +175,7 @@ class TaskJuggler
         rText += @summary.richText.inputText + "\n\n"
       end
       if query.journalAttributes.include?('details') && @details
-        rText += @details.richText.inputText + "\n\n"
+        rText += "<html><font color=black></html>\n" + @details.richText.inputText + "<html></font></html>\n\n"
       end
       rText
     end
@@ -482,6 +482,7 @@ class TaskJuggler
       # we compose the result as RichText markup first.
       rText = ''
       entries.each do |entry|
+        rText += "-----\n" unless rText == ''
         rText += entry.to_rText(query)
       end
 
