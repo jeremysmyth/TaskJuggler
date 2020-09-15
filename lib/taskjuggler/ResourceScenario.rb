@@ -3,7 +3,7 @@
 #
 # = ResourceScenario.rb -- The TaskJuggler III Project Management Software
 #
-# Copyright (c) 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014
+# Copyright (c) 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2020
 #               by Chris Schlaeger <cs@taskjuggler.org>
 #
 # This program is free software; you can redistribute it and/or modify
@@ -320,6 +320,34 @@ class TaskJuggler
       else
         query.string = 'No \'balance\' defined!'
       end
+    end
+
+    # A list of the tasks that the resource has been  allocated to work on in
+    # the report time frame.
+    def query_duties(query)
+      list = []
+      iv = TimeInterval.new(query.start, query.end)
+      @duties.each do |task|
+        if task.hasResourceAllocated?(@scenarioIdx, iv, @property)
+          if query.listItem
+            rti = RichText.new(query.listItem, RTFHandlers.create(@project)).
+              generateIntermediateFormat
+            unless rti
+              error('bad_resource_ts_query',
+                    "Syntax error in query statement for task attribute " +
+                    "'resources'.")
+            end
+            q = query.dup
+            q.property = task
+            q.scopeProperty = @property
+            rti.setQuery(q)
+            list << "<nowiki>#{rti.to_s}</nowiki>"
+          else
+            list << "<nowiki>#{task.name} (#{task.id})</nowiki>"
+          end
+        end
+      end
+      query.assignList(list)
     end
 
     # The effort allocated to the Resource in the specified interval. In case a

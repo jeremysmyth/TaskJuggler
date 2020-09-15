@@ -78,6 +78,7 @@ class TaskJuggler
         'currencyFormat' => RealFormat.new([ '-', '', '', ',', 2 ]),
         'dailyworkinghours' => 8.0,
         'end' => nil,
+        'markdate' => nil,
         'flags' => [],
         'journal' => Journal.new,
         'limits' => nil,
@@ -361,6 +362,8 @@ class TaskJuggler
               true,  false,   false, KeywordArray.new([ '*' ]) ],
         [ 'end',       'End',          DateAttribute,
               true,  true,    false, nil ],
+        [ 'markdate',  'Markdate',     DateAttribute,
+              true,  true,    false, nil ],
         [ 'epilog',    'Epilog',       RichTextAttribute,
               true,  false,   false, nil ],
         [ 'flags',     'Flags',        FlagListAttribute,
@@ -462,7 +465,9 @@ class TaskJuggler
         [ 'weekStartsMonday', 'Week Starts Monday', BooleanAttribute,
               true,  true,    false, false ],
         [ 'width',     'Width',        IntegerAttribute,
-              true,  false,   false, 640 ]
+              true,  false,   false, 640 ],
+        [ 'novevents',  'No vevents in icalreports', BooleanAttribute,
+              true,  false,   false, false ]
       ]
       attrs.each { |a| @reports.addAttributeType(AttributeDefinition.new(*a)) }
 
